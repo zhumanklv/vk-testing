@@ -1,18 +1,8 @@
-
-/*table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    border: 0px solid #ddd;
-}*/
-  
-/*th,
-td {
-    text-align: left;
-    padding: 8px;
-}*/
-
-/* width */        
+*{
+    box-sizing: border-box;
+    font-family: SF Pro Text;
+    
+}
 ::-webkit-scrollbar {
     width: 6px;
     border-radius: 3px;
@@ -20,12 +10,12 @@ td {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: white;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgb(13, 24, 117);
+    background: #DAE2EA;
     border-radius: 3px;
     height: 20px;
 }
@@ -34,20 +24,34 @@ td {
 /*::-webkit-scrollbar-thumb:hover {
     background: #555;
 }*/
+.when-no-emoji{
+    width: 298px;
+    height: 258px;
+}
+.outer-emoji{
+    width: 298px;
+    height: 258px;
+    border: 1px solid #C5D0DB;
+    box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+}
 .scroll{
-    right: 40%;
+    margin-top: 10px;
     width: 290px;
     height: 200px;
     overflow-y:auto;
+    margin-left: 5px;
 }
 .intro{
-    width: 290px;
+    width: fit-content;
     height: fit-content;
-    
+    margin-right: 0;
 }
 .objTitle{
     margin-bottom: 5px;
-    margin-left: 1px;
+    margin-left: 4px;
+    font-family: SF Pro Text;
+    color: #939393;
 }
 .emoji{
     height:26px;
@@ -73,13 +77,66 @@ td {
 }
 
 .bottom-bar{
+    margin-bottom: 0;
+    margin-top: 7px;
     width: 400px;
     height: 36px;
-
+    display: flex;
 }
 
+.emoji-item{
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+.emoji-item:hover{
+    background-color: #fcf6f6;
+}
+.emoji-item-timer{
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
 
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    transition: all 0.3s ease;
+}
+.emoji-item-timer:hover{
+    background-color: #fcf6f6;
+}
 
+.outer-text{
+    width: 298px;
+    height: fit-content;
+    border: 1px solid #C5D0DB;
+    border-radius: 4px;
+}
+textarea{
+    margin-left: 9px;
+    margin-top: 9px;
+    margin-bottom:9px;
+    font-size: 13px;
+    width: 263px;
+    height: 18px;
+    resize: none;
+    border: none;
+    outline: none;
+   overflow: hidden;
+}
 
+.text-area-emojibutton{
+    margin-bottom: 9px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.text-area-emojibutton:hover{
+    background-color: #fcf6f6;
+}
