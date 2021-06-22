@@ -84,7 +84,7 @@ const Render = () => {
       <>
       {emoji_render}
       <div className="outer-text">
-          <textarea onChange={(elem)=>{autoResize(elem); handleChange(elem);}}  value={content} placeholder="Ваше сообщение" className="text"/>
+          <textarea onMouseEnter={(elem)=>{autoResize(elem); handleChange(elem);}}  onChange={(elem)=>{autoResize(elem); handleChange(elem);}}  value={content} placeholder="Ваше сообщение" className="text"/>
           <img src="icon-color.png" alt="emoji-button" className="text-area-emojibutton"  onClick={()=>{setShowEmojis(!ShowEmojis); setToggler(true);}}/>
       </div>
       </>
