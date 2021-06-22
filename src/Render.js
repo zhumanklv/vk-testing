@@ -53,7 +53,7 @@ const Render = () => {
       return <div className="emoji"><div>{obj}</div></div>
     });
 
-    let c = <div className="intro"><div className="objTitle">Часто используемые</div><div className="cont">{b}</div></div>
+    let c = <div className="intro"><div className="objTitle">Недавние</div><div className="cont">{b}</div></div>
     let to_render = toggler ? a : c;
 
 
