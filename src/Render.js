@@ -1,4 +1,3 @@
-//import { from } from "pumpify";
 import { useState } from "react";
 import emojis from './emojis';
 
@@ -16,32 +15,38 @@ let setEmojis = new Set();
 
 const Render = () => {
 
-    const [toggler, setToggler] = useState(true);
-    const [ShowEmojis, setShowEmojis] = useState(false);
-    const [content, setContent] = useState('');
+    const [toggler, setToggler] = useState(true); //переключаться между недавними и всеми смайликами
+    const [ShowEmojis, setShowEmojis] = useState(false); // нажатие на иконку справа поле ввода
+    const [content, setContent] = useState(''); // само сообщение
 
 
 
-    const a = emojis.map(obj =>{
-      
-        const k = obj.items.map(l =>{
-            return <div className="emoji" onClick={()=> { 
-                setContent(content+l);
-                const textarea = document.querySelector('.text');
-                autoResize(textarea);
-                if(!setEmojis.has(l) && (!recent_emojis || recent_emojis.length<25)){
-                  recent_emojis.push(l);
-                  setEmojis.add(l);
-                }else if(!setEmojis.has(l)){
-                  setEmojis.delete(recent_emojis[0]);
-                  setEmojis.add(l);
-                  recent_emojis.shift();
-                  recent_emojis.push(l);
-                }
-              }}>
-              <div>{l}</div>
-              </div>
-        });
+   
+    function rendering(arr){   //rendering emojis in an emoji div
+      return arr.map(l =>{
+        return <div className="emoji" onClick={()=> {   // нажатие на смайлик
+            setContent(content+l);
+            const textarea = document.querySelector('.text');
+            autoResize(textarea);
+            if(!setEmojis.has(l) && (!recent_emojis || recent_emojis.length<25)){
+              recent_emojis.push(l);
+              setEmojis.add(l);
+            }else if(!setEmojis.has(l)){
+              setEmojis.delete(recent_emojis[0]);
+              setEmojis.add(l);
+              recent_emojis.shift();
+              recent_emojis.push(l);
+            }
+          }}>
+          <div>{l}</div>
+          </div>
+    });
+    }
+
+    const a = emojis.map(obj =>{  // массив смайликов из файла emojis.js
+       
+        const k = rendering(obj.items);
+
        return <div className='intro'>
           <div className="objTitle">{obj.title}</div>
           <div class="cont">
@@ -49,19 +54,18 @@ const Render = () => {
           </div>
        </div>
     });
-    let b = recent_emojis.map(obj =>{
-      return <div className="emoji"><div>{obj}</div></div>
-    });
+
+    let b = rendering(recent_emojis);  // рендерить смайлики в недавном
 
     let c = <div className="intro"><div className="objTitle">Недавние</div><div className="cont">{b}</div></div>
-    let to_render = toggler ? a : c;
+    let isGeneral = toggler ? a : c;  // показывать или общие смайлики или недавние
 
 
 
     const emoji_content = 
       <div className='outer-emoji'>
         <div className="scroll">
-        {to_render}
+        {isGeneral} 
         </div>
         <div className="bottom-bar">
           <div className="emoji-item" onClick={()=> {setToggler(true);}}>
@@ -79,11 +83,11 @@ const Render = () => {
         const l = elem.target ? elem.target : elem;
         setContent(l.value);
     }
-    const emoji_render  = ShowEmojis? emoji_content: <div className="when-no-emoji"></div> ; 
+    const emoji_render  = ShowEmojis? emoji_content: <div className="when-no-emoji"></div> ;  // показывать/не показывать окно смайликов 
     return (
       <>
       {emoji_render}
-      <div className="outer-text">
+      <div className="outer-text">  {/*   поле сообщений */}
           <textarea onMouseEnter={(elem)=>{autoResize(elem); handleChange(elem);}}  onChange={(elem)=>{autoResize(elem); handleChange(elem);}}  value={content} placeholder="Ваше сообщение" className="text"/>
           <img src="icon-color.png" alt="emoji-button" className="text-area-emojibutton"  onClick={()=>{setShowEmojis(!ShowEmojis); setToggler(true);}}/>
       </div>
