@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import emojis from './emojis';
 
 
@@ -19,15 +19,15 @@ const Render = () => {
     const [ShowEmojis, setShowEmojis] = useState(false); // нажатие на иконку справа поле ввода
     const [content, setContent] = useState(''); // само сообщение
 
-
+    useEffect(()=>{
+      autoResize(document.querySelector(".text"));
+    }, [content]);
 
    
     function rendering(arr){   //rendering emojis in an emoji div
       return arr.map(l =>{
         return <div className="emoji" onClick={()=> {   // нажатие на смайлик
             setContent(content+l);
-            const textarea = document.querySelector('.text');
-            autoResize(textarea);
             if(!setEmojis.has(l) && (!recent_emojis || recent_emojis.length<25)){
               recent_emojis.push(l);
               setEmojis.add(l);
@@ -88,7 +88,7 @@ const Render = () => {
       <>
       {emoji_render}
       <div className="outer-text">  {/*   поле сообщений */}
-          <textarea onMouseEnter={(elem)=>{autoResize(elem); handleChange(elem);}}  onChange={(elem)=>{autoResize(elem); handleChange(elem);}}  value={content} placeholder="Ваше сообщение" className="text"/>
+          <textarea  onChange={(e)=> {handleChange(e); autoResize(e);}} value={content} placeholder="Ваше сообщение" className="text"/>
           <img src="icon-color.png" alt="emoji-button" className="text-area-emojibutton"  onClick={()=>{setShowEmojis(!ShowEmojis); setToggler(true);}}/>
       </div>
       </>
